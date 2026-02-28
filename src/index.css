@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #059669;
+    --primary-hover: #047857;
+    --bg-main: #ffffff;
+    --bg-card: #ffffff;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #e2e8f0;
+    --accent: #10b981;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-sm;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white px-6 py-2.5 rounded-2xl font-bold uppercase tracking-widest text-xs hover:bg-emerald-600 transition-all duration-300 shadow-lg shadow-emerald-100 active:scale-[0.98] disabled:opacity-50;
+  }
+
+  .card {
+    @apply bg-white rounded-[2rem] border border-gray-100 shadow-sm overflow-hidden hover:shadow-xl transition-all duration-500;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-4 px-5 py-4 rounded-2xl transition-all duration-300 font-bold uppercase tracking-widest text-[10px];
+  }
+
+  .sidebar-link-active {
+    @apply bg-slate-900 text-primary-400 shadow-xl;
+  }
+
+  .sidebar-link-inactive {
+    @apply text-gray-400 hover:bg-slate-100 hover:text-slate-900;
+  }
+
+  .admin-input, .checkout-input {
+    @apply w-full bg-slate-50 border border-gray-100 rounded-2xl p-4 text-slate-900 text-sm font-bold outline-none focus:ring-4 focus:ring-emerald-500/10 focus:border-emerald-500 transition-all placeholder:text-slate-300 placeholder:font-normal;
+  }
+
+  .label-admin {
+    @apply block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 px-1;
+  }
+}
+
+/* Custom Scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.page-transition {
+  @apply transition-all duration-500 ease-in-out;
+}
+
+/* Image Zoom Effect */
+.zoom-active {
+  animation: zoom-pulse 0.2s ease-out;
+}
+
+@keyframes zoom-pulse {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(2);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  .group:hover .group-hover\:opacity-100 {
+    opacity: 1;
+  }
+}
+
+/* Focus visible for accessibility */
+button:focus-visible,
+[tabindex]:focus-visible,
+a:focus-visible {
+  outline: 2px solid #059669;
+  outline-offset: 2px;
+}
