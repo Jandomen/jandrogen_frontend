@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, Package, ShoppingCart, LogOut, Zap, User, MessageSquare, Settings } from 'lucide-react';
+import { LayoutDashboard, Package, ShoppingCart, LogOut, User, MessageSquare, Settings } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 
 const AdminLayout = () => {
@@ -22,12 +22,10 @@ const AdminLayout = () => {
 
     return (
         <div className="flex min-h-screen bg-slate-50">
-           
+
             <aside className="w-64 bg-white border-r border-gray-200 fixed h-full flex flex-col z-20">
                 <div className="p-6 flex items-center gap-3">
-                    <div className="bg-primary-600 p-2 rounded-lg">
-                        <Zap className="text-white fill-current" size={24} />
-                    </div>
+                    <img src="/logo_jandrogen.png" alt="JANDROGEN" className="w-10 h-10 object-contain" />
                     <span className="text-xl font-bold tracking-tight text-gray-900">JANDROGEN</span>
                 </div>
 

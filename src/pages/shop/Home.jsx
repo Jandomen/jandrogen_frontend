@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { 
+import {
   Search, ShoppingCart, User, MessageSquare, Globe, Star,
-  Shield, Truck, Package, ArrowRight, Droplets, Send, X, Plus
+  Shield, Truck, Package, ArrowRight, Send, X, Plus
 } from 'lucide-react';
 import { useCart } from '../../contexts/CartContext';
 import { useToast } from '../../components/Toast';
@@ -22,9 +22,8 @@ const CategoryNav = ({ scrollToSection, activeCategory, onCategorySelect }) => {
     <nav className="hidden lg:flex items-center gap-1">
       <button
         onClick={() => onCategorySelect(null)}
-        className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-          !activeCategory ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
-        }`}
+        className={`px - 4 py - 2 text - sm font - medium rounded - lg transition - all ${!activeCategory ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+          } `}
       >
         Todos
       </button>
@@ -32,9 +31,8 @@ const CategoryNav = ({ scrollToSection, activeCategory, onCategorySelect }) => {
         <button
           key={cat.slug}
           onClick={() => onCategorySelect(cat.slug)}
-          className={`px-4 py-2 text-sm font-medium rounded-lg transition-all ${
-            activeCategory === cat.slug ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
-          }`}
+          className={`px - 4 py - 2 text - sm font - medium rounded - lg transition - all ${activeCategory === cat.slug ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
+            } `}
         >
           {cat.name}
         </button>
@@ -57,7 +55,7 @@ const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, s
   const showDropdown = searchQuery.length > 0 && filteredProducts.length > 0;
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white'}`}>
+    <header className={`sticky top - 0 z - 50 transition - all duration - 300 ${isScrolled ? 'bg-white shadow-md' : 'bg-white'} `}>
       <div className="border-b border-gray-100">
         <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between h-11 text-xs font-bold uppercase tracking-wider text-gray-500">
@@ -86,24 +84,26 @@ const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, s
 
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
         <div className="flex items-center gap-6 h-20">
-            <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-              <img src="/logo_jandrogen.png" alt="JANDROGEN" className="w-12 h-12" />
-              <span className="text-xl font-black tracking-tight text-gray-900">
+          <Link to="/" className="flex items-center gap-4 flex-shrink-0 group">
+            <img src="/logo_jandrogen.png" alt="JANDROGEN" className="w-16 h-16 object-contain group-hover:scale-110 transition-transform duration-300" />
+            <div className="flex flex-col">
+              <span className="text-2xl font-black tracking-tight text-gray-900 leading-none">
                 JANDROGEN
-                <span className="text-[8px] text-primary-600 tracking-[0.3em] uppercase block -mt-1 font-bold">Systems</span>
               </span>
-            </Link>
+              <span className="text-[10px] text-primary-600 tracking-[0.4em] uppercase font-black">Systems</span>
+            </div>
+          </Link>
 
-          <CategoryNav 
-            scrollToSection={scrollToSection} 
-            activeCategory={activeCategory} 
+          <CategoryNav
+            scrollToSection={scrollToSection}
+            activeCategory={activeCategory}
             onCategorySelect={(cat) => {
               setActiveCategory(cat);
               if (cat) {
                 const element = document.getElementById('catalogo');
                 if (element) element.scrollIntoView({ behavior: 'smooth' });
               }
-            }} 
+            }}
           />
 
           <div className="flex-1 max-w-xl mx-4 relative">
@@ -118,7 +118,7 @@ const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, s
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             </div>
-            
+
             {showDropdown && (
               <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-50 max-h-80 overflow-y-auto">
                 <div className="p-2 text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100">
@@ -127,7 +127,7 @@ const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, s
                 {filteredProducts.slice(0, 6).map((product) => (
                   <Link
                     key={product._id}
-                    to={`/product/${product._id}`}
+                    to={`/ product / ${product._id} `}
                     onClick={() => { setSearchQuery(''); setShowResults(false); }}
                     className="flex items-center gap-4 p-3 hover:bg-gray-50 transition-colors"
                   >
@@ -145,7 +145,7 @@ const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, s
                   </Link>
                 ))}
                 {filteredProducts.length > 6 && (
-                  <button 
+                  <button
                     onClick={() => { scrollToSection('catalogo'); setShowResults(false); }}
                     className="w-full p-3 text-center text-sm font-bold text-primary-600 hover:bg-gray-50 border-t border-gray-100"
                   >
@@ -187,11 +187,12 @@ const Hero = ({ scrollToSection }) => {
       <div className="absolute inset-0 opacity-30">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMxMGI5MzEiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPjwvZz48L2c+PC9zdmc+')] animate-pulse" />
       </div>
-      
+
       <div className="absolute inset-0">
         <img src="/hidrogeno2.jpg" alt="Ecosistema Completo de Hidrógeno Verde" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-slate-900/80 via-slate-900/40 to-transparent" />
       </div>
-      
+
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 lg:px-8 py-16 lg:py-24">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative z-20 space-y-6">
@@ -204,28 +205,28 @@ const Hero = ({ scrollToSection }) => {
                 <Star size={14} className="fill-current" /> Tecnología ISO 2026
               </span>
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl lg:text-6xl font-black text-white leading-tight"
+              className="text-4xl lg:text-5xl font-black text-white leading-tight drop-shadow-2xl"
             >
               Ecosistema Completo de{' '}
               <span className="text-primary-400">Hidrógeno Verde</span>
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-gray-300 max-w-lg"
             >
-              La plataforma líder para el suministro de equipos industriales de energía limpia. 
+              La plataforma líder para el suministro de equipos industriales de energía limpia.
               Ingeniería de vanguardia para un futuro sostenible.
             </motion.p>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -291,17 +292,16 @@ const TrustBadges = ({ navigate, scrollToSection }) => {
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
           {badges.map((badge, i) => (
-            <div 
+            <div
               key={i}
               onClick={badge.action}
-              className={`flex items-center gap-4 ${badge.action ? 'cursor-pointer hover:bg-gray-50 p-4 -m-4 rounded-xl transition-all' : ''}`}
+              className={`flex items - center gap - 4 ${badge.action ? 'cursor-pointer hover:bg-gray-50 p-4 -m-4 rounded-xl transition-all' : ''} `}
             >
-              <div className={`p-3 rounded-xl ${
-                badge.color === 'blue' ? 'bg-blue-50 text-blue-600' :
-                badge.color === 'primary' ? 'bg-primary-50 text-primary-600' :
-                badge.color === 'amber' ? 'bg-amber-50 text-amber-600' :
-                'bg-purple-50 text-purple-600'
-              }`}>
+              <div className={`p - 3 rounded - xl ${badge.color === 'blue' ? 'bg-blue-50 text-blue-600' :
+                  badge.color === 'primary' ? 'bg-primary-50 text-primary-600' :
+                    badge.color === 'amber' ? 'bg-amber-50 text-amber-600' :
+                      'bg-purple-50 text-purple-600'
+                } `}>
                 <badge.icon size={24} />
               </div>
               <div>
@@ -329,43 +329,43 @@ const ProductSection = ({ products, loading, addToCart, addToast, scrollToSectio
     return cat ? cat.description : '';
   };
 
-  const productElements = loading 
+  const productElements = loading
     ? Array(5).fill(0).map((_, i) => (
-        <div key={i} className="bg-white rounded-xl border border-gray-100 h-80 animate-pulse" />
-      ))
+      <div key={i} className="bg-white rounded-xl border border-gray-100 h-80 animate-pulse" />
+    ))
     : products.map((product) => (
-        <motion.div
-          key={product._id}
-          whileHover={{ y: -4 }}
-          className="group bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all"
-        >
-          <Link to={`/product/${product._id}`} className="block aspect-square overflow-hidden bg-gray-50">
-            {product.images?.[0] ? (
-              <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-300">
-                <Package size={48} />
-              </div>
-            )}
-          </Link>
-          <div className="p-4">
-            <Link to={`/product/${product._id}`}>
-              <h3 className="font-bold text-gray-900 text-sm line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors">
-                {product.name}
-              </h3>
-            </Link>
-            <div className="flex items-center justify-between">
-              <p className="font-black text-primary-600">${product.priceUSD?.toLocaleString()}</p>
-              <button
-                onClick={() => addToCart(product)}
-                className="w-8 h-8 bg-primary-600 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 transition-colors"
-              >
-                <Plus size={16} />
-              </button>
+      <motion.div
+        key={product._id}
+        whileHover={{ y: -4 }}
+        className="group bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all"
+      >
+        <Link to={`/ product / ${product._id} `} className="block aspect-square overflow-hidden bg-gray-50">
+          {product.images?.[0] ? (
+            <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-300">
+              <Package size={48} />
             </div>
+          )}
+        </Link>
+        <div className="p-4">
+          <Link to={`/ product / ${product._id} `}>
+            <h3 className="font-bold text-gray-900 text-sm line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors">
+              {product.name}
+            </h3>
+          </Link>
+          <div className="flex items-center justify-between">
+            <p className="font-black text-primary-600">${product.priceUSD?.toLocaleString()}</p>
+            <button
+              onClick={() => addToCart(product)}
+              className="w-8 h-8 bg-primary-600 text-white rounded-lg flex items-center justify-center hover:bg-primary-700 transition-colors"
+            >
+              <Plus size={16} />
+            </button>
           </div>
-        </motion.div>
-      ));
+        </div>
+      </motion.div>
+    ));
 
   return (
     <section id="catalogo" className="py-12 lg:py-16">
@@ -376,7 +376,7 @@ const ProductSection = ({ products, loading, addToCart, addToast, scrollToSectio
             <p className="text-gray-500 mt-1">{getCategorySubtitle()}</p>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 lg:gap-6">
           {productElements}
         </div>
@@ -400,14 +400,15 @@ const ProductSection = ({ products, loading, addToCart, addToast, scrollToSectio
 const SolutionsSection = ({ scrollToSection }) => {
   return (
     <section id="soluciones" className="py-12 lg:py-16 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-50">
+      <div className="absolute inset-0">
         <img src="/hidrogeno1.jpg" alt="Soluciones de Ingeniería" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-[2px]" />
       </div>
       <div className="relative z-10 max-w-[1600px] mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative z-20">
             <span className="text-primary-400 text-sm font-bold uppercase tracking-widest">Soluciones de Ingeniería</span>
-            <h2 className="text-3xl lg:text-4xl font-black text-white mt-4 mb-6">
+            <h2 className="text-3xl lg:text-4xl font-black text-white mt-4 mb-6 drop-shadow-lg">
               Diseñamos tu infraestructura de energía futura
             </h2>
             <p className="text-gray-100 text-lg mb-8 max-w-md">
@@ -448,7 +449,7 @@ const ContactSection = ({ handleFeatureSoon }) => {
   const [modalType, setModalType] = useState('email');
   const [loading, setLoading] = useState(false);
   const { addToast } = useToast();
-  
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -497,13 +498,13 @@ const ContactSection = ({ handleFeatureSoon }) => {
               Nuestro equipo de ingeniería está listo para ayudarte. Obtén respuesta profesional en minutos.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <button 
+              <button
                 onClick={() => handleOpenModal('email')}
                 className="inline-flex items-center gap-2 bg-slate-900 text-white px-8 py-4 rounded-full font-bold hover:bg-primary-600 transition-all"
               >
                 <MessageSquare size={20} /> Email Técnico
               </button>
-              <button 
+              <button
                 onClick={() => handleOpenModal('whatsapp')}
                 className="inline-flex items-center gap-2 border-2 border-gray-200 text-gray-700 px-8 py-4 rounded-full font-bold hover:bg-gray-50 transition-all"
               >
@@ -532,11 +533,11 @@ const ContactSection = ({ handleFeatureSoon }) => {
             </div>
             <form onSubmit={handleSubmit} className="p-8 space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <input required type="text" placeholder="Tu nombre" className="px-4 py-3 rounded-xl border border-gray-100 bg-gray-50" value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
-                <input required type="tel" placeholder="Teléfono" className="px-4 py-3 rounded-xl border border-gray-100 bg-gray-50" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                <input required type="text" placeholder="Tu nombre" className="px-4 py-3 rounded-xl border border-gray-100 bg-gray-50" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} />
+                <input required type="tel" placeholder="Teléfono" className="px-4 py-3 rounded-xl border border-gray-100 bg-gray-50" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
               </div>
-              <input required type="email" placeholder="Tu email" className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-              <textarea required rows="4" placeholder="¿En qué podemos ayudarte?" className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 resize-none" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
+              <input required type="email" placeholder="Tu email" className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+              <textarea required rows="4" placeholder="¿En qué podemos ayudarte?" className="w-full px-4 py-3 rounded-xl border border-gray-100 bg-gray-50 resize-none" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} />
               <button type="submit" disabled={loading} className="w-full bg-primary-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 disabled:opacity-50">
                 {loading ? <div className="animate-spin rounded-full w-5 h-5 border-2 border-white/30 border-t-white" /> : <>Enviar <Send size={18} /></>}
               </button>
@@ -560,14 +561,15 @@ const Footer = ({ scrollToSection, navigate }) => {
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2">
-            <Link to="/" className="flex items-center gap-2 mb-4">
-              <div className="bg-primary-600 p-2 rounded-lg text-white">
-                <Droplets size={20} />
+            <Link to="/" className="flex items-center gap-3 mb-6 group">
+              <img src="/logo_jandrogen.png" alt="JANDROGEN" className="w-14 h-14 object-contain" />
+              <div className="flex flex-col">
+                <span className="text-xl font-black text-gray-900 leading-none">JANDROGEN</span>
+                <span className="text-[8px] text-primary-600 tracking-[0.3em] uppercase font-black">Systems</span>
               </div>
-              <span className="text-lg font-black text-gray-900">JANDROGEN</span>
             </Link>
             <p className="text-gray-500 text-sm max-w-sm">
-              La plataforma industrial líder para el futuro de la energía limpia. 
+              La plataforma industrial líder para el futuro de la energía limpia.
               Conectando tecnología de vanguardia con necesidades globales.
             </p>
           </div>
@@ -644,8 +646,8 @@ const Home = () => {
         });
         if (activeCategory) params.append('category', activeCategory);
         if (searchQuery) params.append('search', searchQuery);
-        
-        const response = await api.get(`/products?${params}`);
+
+        const response = await api.get(`/ products ? ${params} `);
         if (pagination.page === 1) {
           setProducts(response.data.products || []);
         } else {
@@ -677,7 +679,7 @@ const Home = () => {
   }, [activeCategory, searchQuery]);
 
   const filteredProducts = products.filter(p => {
-    const matchesSearch = searchQuery === '' || 
+    const matchesSearch = searchQuery === '' ||
       p.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.description?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = !activeCategory || !p.category || p.category === activeCategory;
@@ -695,7 +697,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header 
+      <Header
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
         filteredProducts={filteredProducts}
@@ -706,12 +708,12 @@ const Home = () => {
         activeCategory={activeCategory}
         setActiveCategory={setActiveCategory}
       />
-      
+
       <Hero scrollToSection={scrollToSection} />
-      
+
       <TrustBadges navigate={navigate} scrollToSection={scrollToSection} />
-      
-      <ProductSection 
+
+      <ProductSection
         products={filteredProducts}
         loading={loading}
         addToCart={addToCart}
@@ -721,11 +723,11 @@ const Home = () => {
         loadMore={loadMore}
         pagination={pagination}
       />
-      
+
       <SolutionsSection scrollToSection={scrollToSection} />
-      
+
       <ContactSection handleFeatureSoon={handleFeatureSoon} />
-      
+
       <Footer scrollToSection={scrollToSection} navigate={navigate} />
     </div>
   );
