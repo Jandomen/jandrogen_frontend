@@ -18,8 +18,20 @@ module.exports = {
           800: '#166534',
           900: '#14532d',
           950: '#052e16',
+          'solid': '#059669',
+          'soft': '#ecfdf5',
+          'dark': '#065f46',
         },
+        secondary: {
+          DEFAULT: '#0f172a',
+          light: '#1e293b',
+        }
       },
+      boxShadow: {
+        'premium': '0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)',
+        'soft': '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)',
+        'glow': '0 0 20px -5px rgba(16, 185, 129, 0.3)',
+      }
     },
   },
   plugins: [],
