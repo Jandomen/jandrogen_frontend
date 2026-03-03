@@ -26,7 +26,7 @@ const ProductGrid = ({ loading, products, addToCart, addToast, handleFeatureSoon
                     ))}
                 </div>
             ) : (
-                <div className="grid grid-cols-2 lg:grid-cols-5 gap-5">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 xxl:grid-cols-6 gap-4">
                     {products.map((product) => (
                         <motion.div
                             key={product._id}
@@ -58,44 +58,44 @@ const ProductGrid = ({ loading, products, addToCart, addToast, handleFeatureSoon
                                 </button>
                             </Link>
 
-                            <div className="p-4 flex flex-col flex-1">
+                            <div className="p-3 flex flex-col flex-1">
                                 <Link to={`/product/${product._id}`}>
-                                    <h3 className="text-sm font-bold text-gray-800 line-clamp-2 mb-2 group-hover:text-primary-600 transition-colors h-10">
+                                    <h3 className="text-xs font-bold text-gray-800 line-clamp-2 mb-1 group-hover:text-primary-600 transition-colors h-8">
                                         {product.name}
                                     </h3>
                                 </Link>
 
                                 <div className="mt-auto">
-                                    <div className="flex items-baseline gap-1 mt-2">
-                                        <span className="text-[10px] font-bold text-gray-400">USD</span>
-                                        <span className="text-xl font-black text-gray-900 leading-none">
+                                    <div className="flex items-baseline gap-1 mt-1">
+                                        <span className="text-[9px] font-bold text-gray-400">USD</span>
+                                        <span className="text-lg font-black text-gray-900 leading-none">
                                             ${product.priceUSD.toLocaleString()}
                                         </span>
                                     </div>
 
-                                    <div className="flex items-center gap-2 mt-3 text-[10px] font-bold text-gray-500 border-t border-gray-50 pt-3">
+                                    <div className="flex items-center gap-2 mt-2 text-[9px] font-bold text-gray-500 border-t border-gray-50 pt-2">
                                         <div className="flex items-center gap-0.5 text-amber-500">
-                                            <Star size={10} fill="currentColor" />
-                                            <Star size={10} fill="currentColor" />
-                                            <Star size={10} fill="currentColor" />
-                                            <Star size={10} fill="currentColor" />
-                                            <Star size={10} fill="currentColor" />
+                                            <Star size={8} fill="currentColor" />
+                                            <Star size={8} fill="currentColor" />
+                                            <Star size={8} fill="currentColor" />
+                                            <Star size={8} fill="currentColor" />
+                                            <Star size={8} fill="currentColor" />
                                         </div>
-                                        <span>4.9 (88 reseñas)</span>
+                                        <span>4.9</span>
                                     </div>
 
-                                    <div className="mt-4 flex gap-2">
-                                        <Link to={`/product/${product._id}`} className="flex-1 bg-primary-50 text-primary-600 text-[10px] font-black py-2.5 rounded-lg text-center uppercase tracking-widest hover:bg-primary-600 hover:text-white transition-all">
-                                            Consultar
+                                    <div className="mt-3 flex gap-1.5">
+                                        <Link to={`/product/${product._id}`} className="flex-1 bg-primary-50 text-primary-600 text-[9px] font-black py-2 rounded-lg text-center uppercase tracking-widest hover:bg-primary-600 hover:text-white transition-all">
+                                            Info
                                         </Link>
                                         <button
                                             onClick={() => {
                                                 addToCart(product);
                                                 addToast(`${product.name} añadido al carrito`, 'success');
                                             }}
-                                            className="w-10 h-10 bg-slate-900 text-white rounded-lg flex items-center justify-center hover:bg-primary-600 transition-all shadow-sm"
+                                            className="w-8 h-8 bg-slate-900 text-white rounded-lg flex items-center justify-center hover:bg-primary-600 transition-all shadow-sm"
                                         >
-                                            <ShoppingCart size={16} />
+                                            <ShoppingCart size={14} />
                                         </button>
                                     </div>
                                 </div>

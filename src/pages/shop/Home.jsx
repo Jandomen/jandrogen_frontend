@@ -9,37 +9,7 @@ import { useCart } from '../../contexts/CartContext';
 import { useToast } from '../../components/Toast';
 import api from '../../config/axios';
 
-const CATEGORIES = [
-  { name: 'Generación PEM', slug: 'pem', description: 'Electrolizadores y sistemas de generación' },
-  { name: 'Almacenamiento', slug: 'storage', description: 'Tanques y sistemas de almacenamiento H2' },
-  { name: 'Componentes H2', slug: 'components', description: 'Componentes y refacciones' },
-  { name: 'Infraestructura', slug: 'infra', description: 'Infraestructura industrial' },
-  { name: 'Sistemas Móviles', slug: 'mobile', description: 'Sistemas móviles y portables' },
-];
 
-const CategoryNav = ({ scrollToSection, activeCategory, onCategorySelect }) => {
-  return (
-    <nav className="hidden lg:flex items-center gap-1">
-      <button
-        onClick={() => onCategorySelect(null)}
-        className={`px - 4 py - 2 text - sm font - medium rounded - lg transition - all ${!activeCategory ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
-          } `}
-      >
-        Todos
-      </button>
-      {CATEGORIES.map((cat) => (
-        <button
-          key={cat.slug}
-          onClick={() => onCategorySelect(cat.slug)}
-          className={`px - 4 py - 2 text - sm font - medium rounded - lg transition - all ${activeCategory === cat.slug ? 'bg-primary-600 text-white' : 'text-gray-600 hover:text-primary-600 hover:bg-gray-50'
-            } `}
-        >
-          {cat.name}
-        </button>
-      ))}
-    </nav>
-  );
-};
 
 const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, scrollToSection, handleFeatureSoon, navigate, activeCategory, setActiveCategory }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -72,99 +42,97 @@ const Header = ({ searchQuery, setSearchQuery, filteredProducts, getCartCount, s
       </div>
 
       <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
-        <div className={`flex items-center gap-8 transition-all duration-500 ${isScrolled ? 'h-16' : 'h-24'}`}>
-          <Link to="/" className="flex items-center gap-4 flex-shrink-0 group">
-            <img src="/logo_jandrogen.png" alt="JANDROGEN" className={`object-contain group-hover:scale-110 transition-transform duration-500 ${isScrolled ? 'w-10 h-10' : 'w-14 h-14'}`} />
-            <div className="flex flex-col">
-              <span className={`font-black tracking-tight text-slate-900 leading-none transition-all ${isScrolled ? 'text-lg' : 'text-2xl'}`}>
-                JANDROGEN
-              </span>
-              <span className={`text-primary-solid tracking-[0.4em] uppercase font-black transition-all ${isScrolled ? 'text-[8px]' : 'text-[10px]'}`}>Systems</span>
-            </div>
-          </Link>
-
-          <CategoryNav
-            scrollToSection={scrollToSection}
-            activeCategory={activeCategory}
-            onCategorySelect={(cat) => {
-              setActiveCategory(cat);
-              if (cat) {
-                const element = document.getElementById('catalogo');
-                if (element) element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-          />
-
-          <div className="flex-1 max-w-xl mx-4 relative group">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Buscar tecnología de hidrógeno..."
-                value={searchQuery}
-                onChange={(e) => { setSearchQuery(e.target.value); setShowResults(true); }}
-                onFocus={() => setShowResults(true)}
-                className="w-full h-12 pl-14 pr-4 bg-slate-50 border-2 border-slate-50 rounded-[1.25rem] focus:bg-white focus:border-primary-solid focus:ring-4 focus:ring-emerald-500/5 transition-all text-sm font-bold shadow-inner"
+        <div className={`flex flex-col transition-all duration-500 ${isScrolled ? 'h-auto' : 'h-auto py-2'}`}>
+          <div className="flex items-center justify-between gap-4 h-16 md:h-20">
+            <Link to="/" className="flex items-center gap-2 flex-shrink-0 group">
+              <img
+                src="/logo_jandrogen.png"
+                alt="JANDROGEN"
+                className={`object-contain transition-transform duration-500 ${isScrolled ? 'h-10' : 'h-14 md:h-16'}`}
               />
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-primary-solid transition-colors" size={20} />
+            </Link>
+
+            <div className="hidden md:flex flex-1 max-w-xl mx-4 relative group">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Buscar tecnología de hidrógeno..."
+                  value={searchQuery}
+                  onChange={(e) => { setSearchQuery(e.target.value); setShowResults(true); }}
+                  onFocus={() => setShowResults(true)}
+                  className="w-full h-11 pl-12 pr-4 bg-slate-50 border-2 border-slate-50 rounded-2xl focus:bg-white focus:border-primary-solid focus:ring-4 focus:ring-emerald-500/5 transition-all text-sm font-bold"
+                />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+              </div>
+
+              {showDropdown && (
+                <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-2xl shadow-premium border border-slate-100 overflow-hidden z-50 max-h-96 overflow-y-auto">
+                  <div className="p-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-50 bg-slate-50/50">
+                    {filteredProducts.length} equipo{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''}
+                  </div>
+                  {filteredProducts.slice(0, 6).map((product) => (
+                    <Link
+                      key={product._id}
+                      to={`/product/${product._id}`}
+                      onClick={() => { setSearchQuery(''); setShowResults(false); }}
+                      className="flex items-center gap-4 p-4 hover:bg-slate-50 transition-all group/item"
+                    >
+                      <div className="w-12 h-12 rounded-xl overflow-hidden bg-slate-100 flex-shrink-0">
+                        {product.images?.[0] ? (
+                          <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
+                        ) : (
+                          <Package size={20} className="text-slate-300 m-auto" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="font-bold text-slate-800 text-sm truncate">{product.name}</p>
+                        <p className="text-xs font-black text-primary-solid">${product.priceUSD?.toLocaleString()} USD</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
             </div>
 
-            {showDropdown && (
-              <div className="absolute top-full left-0 right-0 mt-3 bg-white rounded-[2rem] shadow-premium border border-slate-100 overflow-hidden z-50 max-h-96 overflow-y-auto animate-in fade-in slide-in-from-top-4 duration-300">
-                <div className="p-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] border-b border-slate-50 bg-slate-50/50">
-                  {filteredProducts.length} equipo{filteredProducts.length !== 1 ? 's' : ''} encontrado{filteredProducts.length !== 1 ? 's' : ''}
-                </div>
-                {filteredProducts.slice(0, 6).map((product) => (
-                  <Link
-                    key={product._id}
-                    to={`/product/${product._id}`}
-                    onClick={() => { setSearchQuery(''); setShowResults(false); }}
-                    className="flex items-center gap-6 p-4 hover:bg-slate-50 transition-all group/item"
-                  >
-                    <div className="w-16 h-16 rounded-2xl overflow-hidden bg-slate-100 flex-shrink-0 shadow-inner group-hover/item:scale-105 transition-transform">
-                      {product.images?.[0] ? (
-                        <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <Package size={24} className="text-slate-300 m-auto" />
-                      )}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <p className="font-black text-slate-800 text-sm truncate group-hover/item:text-primary-solid transition-colors">{product.name}</p>
-                      <div className="flex items-center gap-2 mt-1">
-                        <p className="text-xs font-black text-primary-solid">${product.priceUSD?.toLocaleString()} USD</p>
-                        <span className="w-1 h-1 bg-slate-200 rounded-full" />
-                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{product.category}</p>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-
-          <div className="flex items-center gap-6">
-            <button onClick={() => handleFeatureSoon('Mi Cuenta')} className="hidden xl:flex flex-col items-center gap-1 group">
-              <div className="p-2 rounded-xl group-hover:bg-primary-soft transition-colors">
-                <User size={22} className="text-slate-600 group-hover:text-primary-solid transition-colors" />
-              </div>
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Cuenta</span>
-            </button>
-            <button onClick={() => scrollToSection('contacto')} className="hidden xl:flex flex-col items-center gap-1 group">
-              <div className="p-2 rounded-xl group-hover:bg-primary-soft transition-colors">
-                <MessageSquare size={22} className="text-slate-600 group-hover:text-primary-solid transition-colors" />
-              </div>
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Contacto</span>
-            </button>
-            <Link to="/cart" className="relative flex flex-col items-center gap-1 group">
-              <div className="p-2 rounded-xl group-hover:bg-primary-soft transition-colors">
-                <ShoppingCart size={22} className="text-slate-600 group-hover:text-primary-solid transition-colors" />
+            <div className="flex items-center gap-2 md:gap-5">
+              <button
+                onClick={() => handleFeatureSoon('Búsqueda')}
+                className="md:hidden p-2 text-slate-600 hover:bg-slate-50 rounded-xl"
+              >
+                <Search size={20} />
+              </button>
+              <button onClick={() => handleFeatureSoon('Mi Cuenta')} className="hidden sm:flex flex-col items-center gap-1 group">
+                <User size={20} className="text-slate-600" />
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Cuenta</span>
+              </button>
+              <button onClick={() => scrollToSection('contacto')} className="flex flex-col items-center gap-1 group">
+                <MessageSquare size={20} className="text-slate-600" />
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Contacto</span>
+              </button>
+              <Link to="/cart" className="relative flex flex-col items-center gap-1 group">
+                <ShoppingCart size={20} className="text-slate-600" />
                 {getCartCount() > 0 && (
-                  <span className="absolute top-0 right-0 bg-primary-solid text-white text-[9px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-lg animate-bounce">
+                  <span className="absolute -top-1 -right-1 bg-primary-solid text-white text-[8px] font-bold w-4 h-4 rounded-full flex items-center justify-center">
                     {getCartCount()}
                   </span>
                 )}
-              </div>
-              <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Carrito</span>
-            </Link>
+                <span className="text-[8px] font-bold text-slate-400 uppercase tracking-widest">Carrito</span>
+              </Link>
+            </div>
+          </div>
+
+          <div className="md:hidden pb-3">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Buscar tecnología..."
+                value={searchQuery}
+                onChange={(e) => { setSearchQuery(e.target.value); setShowResults(true); }}
+                onFocus={() => setShowResults(true)}
+                className="w-full h-10 pl-10 pr-4 bg-slate-100 border-none rounded-xl focus:bg-white focus:ring-2 focus:ring-primary-solid/20 transition-all text-xs font-bold"
+              />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            </div>
           </div>
         </div>
       </div>
@@ -305,15 +273,11 @@ const TrustBadges = ({ navigate, scrollToSection }) => {
 
 const ProductSection = ({ products, loading, addToCart, activeCategory, loadMore, pagination }) => {
   const getCategoryTitle = () => {
-    if (!activeCategory) return 'Sistemas Destacados';
-    const cat = CATEGORIES.find(c => c.slug === activeCategory);
-    return cat ? cat.name : 'Equipos';
+    return 'Sistemas Destacados';
   };
 
   const getCategorySubtitle = () => {
-    if (!activeCategory) return 'Tecnología disponible para implementación inmediata';
-    const cat = CATEGORIES.find(c => c.slug === activeCategory);
-    return cat ? cat.description : '';
+    return 'Tecnología disponible para implementación inmediata';
   };
 
   return (
@@ -331,7 +295,7 @@ const ProductSection = ({ products, loading, addToCart, activeCategory, loadMore
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xxl:grid-cols-5 gap-8 lg:gap-10">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 lg:gap-6">
           {loading && products.length === 0
             ? Array(8).fill(0).map((_, i) => (
               <div key={i} className="card-premium h-[450px] animate-pulse bg-slate-100" />
@@ -378,7 +342,7 @@ const ProductSection = ({ products, loading, addToCart, activeCategory, loadMore
                       onClick={() => addToCart(product)}
                       className="btn-primary flex-1 !rounded-[1.25rem] !py-4 shadow-soft"
                     >
-                      <Plus size={18} strokeWidth={3} /> Añadir al Proyecto
+                      <Plus size={18} strokeWidth={3} /> Añadir al carrito
                     </button>
                   </div>
                 </div>
@@ -597,11 +561,11 @@ const Footer = ({ scrollToSection }) => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-16 mb-20">
           <div className="lg:col-span-2 space-y-8">
             <Link to="/" className="flex items-center gap-4 group">
-              <img src="/logo_jandrogen.png" alt="JANDROGEN" className="w-14 h-14 object-contain" />
-              <div className="flex flex-col">
-                <span className="text-2xl font-black text-white leading-none tracking-tighter">JANDROGEN</span>
-                <span className="text-[10px] text-primary-solid tracking-[0.4em] uppercase font-black">Systems</span>
-              </div>
+              <img
+                src="/logo_jandrogen.png"
+                alt="JANDROGEN"
+                className="h-16 w-auto object-contain"
+              />
             </Link>
             <p className="text-slate-400 text-sm font-medium leading-relaxed max-w-sm">
               Líderes globales en tecnología de hidrógeno verde.

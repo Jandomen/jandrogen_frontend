@@ -7,13 +7,11 @@ const HomeHeader = ({ searchQuery, setSearchQuery, filteredProducts, getCartCoun
         <header className="bg-white sticky top-0 z-50 shadow-sm border-b border-gray-100">
             <div className="max-w-[1400px] mx-auto px-4 h-20 flex items-center gap-8">
                 <Link to="/" className="flex items-center gap-2 flex-shrink-0">
-                    <div className="bg-primary-600 p-1.5 rounded-lg text-white">
-                        <Droplets size={28} />
-                    </div>
-                    <span className="text-2xl font-black tracking-tighter text-gray-900 leading-none">
-                        JANDROGEN<br />
-                        <span className="text-[10px] text-primary-600 tracking-[0.3em] uppercase block -mt-1 font-bold">Systems</span>
-                    </span>
+                    <img
+                        src="/logo_jandrogen.png"
+                        alt="JANDROGEN"
+                        className="h-12 w-auto object-contain"
+                    />
                 </Link>
 
                 <button

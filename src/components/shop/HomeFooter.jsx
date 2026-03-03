@@ -9,10 +9,11 @@ const HomeFooter = ({ scrollToSection, handleFeatureSoon, navigate }) => {
                 <div className="grid md:grid-cols-5 gap-12 mb-20">
                     <div className="col-span-2">
                         <Link to="/" className="flex items-center gap-2 mb-8">
-                            <div className="bg-primary-600 p-1 rounded-lg text-white">
-                                <Droplets size={24} />
-                            </div>
-                            <span className="text-xl font-black tracking-tighter text-gray-900 uppercase">JANDROGEN</span>
+                            <img
+                                src="/logo_jandrogen.png"
+                                alt="JANDROGEN"
+                                className="h-10 w-auto object-contain"
+                            />
                         </Link>
                         <p className="text-gray-500 text-sm font-medium leading-relaxed max-w-sm mb-8">
                             La plataforma industrial líder para el futuro de la energía pura. Conectando tecnología de vanguardia con las necesidades energéticas globales.

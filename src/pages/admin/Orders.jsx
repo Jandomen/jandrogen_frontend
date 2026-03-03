@@ -25,9 +25,13 @@ const Orders = () => {
     const fetchOrders = async () => {
         try {
             const response = await api.get('/orders');
-            setOrders(response.data);
+            // Check if response.data is an object with an orders property (as per backend)
+            // or an array (older versions or fallback)
+            const ordersData = response.data.orders || (Array.isArray(response.data) ? response.data : []);
+            setOrders(ordersData);
         } catch (error) {
             console.error('Error fetching orders:', error);
+            setOrders([]); // Set to empty array on error to prevent .filter crash
         } finally {
             setLoading(false);
         }

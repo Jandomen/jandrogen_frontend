@@ -39,7 +39,7 @@ const ProductActions = ({ product, onAddToCart, onAction }) => {
                         className="w-full bg-primary-600 text-white py-4 rounded-xl font-black text-sm uppercase tracking-widest shadow-lg shadow-primary-100 hover:bg-primary-700 transition flex items-center justify-center gap-2"
                     >
                         <ShoppingCart size={18} />
-                        Agregar Equipo
+                        Añadir al carrito
                     </button>
                     <button
                         onClick={() => onAction('Nuestros ingenieros se pondrán en contacto para su cotización en breve')}
